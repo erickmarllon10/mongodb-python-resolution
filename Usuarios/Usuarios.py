@@ -42,25 +42,37 @@ def acessar_sistema():
         session = Session()
         emailUser = raw_input("Informe seu email: ")
         senhaUser = raw_input("Digite a sua senha de usuario: ")
-        usuarios = session.query(Usuarios).all()
-        for u in usuarios:
-            if emailUser == u.email:
-                if senhaUser == u.senha:
-                    print "Usuario Autenticado"
-                    acessar_servidor(emailUser)
-                    srv = input("Digite o id do servidor que deseja acessar: ")
-                    servidor = session.query(Servidores).filter(Servidores.id==srv).first()
-                    registrar_logs(emailUser, servidor.endereco)
-                    break
-                else:
-                    print "Senha Incorreta"
-                    break
-        else:
-            print "Usuario nao encontrado"
+        while True:
+            usuario = session.query(Usuarios).filter(Usuarios.email==emailUser).first()
+            if usuario == None:
+                emailUser = raw_input("Usuario nao encontrado. Digite o seu email: ")
+            else:
+                break
+        userPass = session.query(Usuarios).filter(Usuarios.senha==senhaUser).first()
+        count = 1
+        while count <=4:
+            if userPass == None:
+                senhaUser = raw_input("senha incorreta. Digite a senha novamente ou s para \"esqueci a senha\" (tentativa %s de 3): "%count)
+                userPass = session.query(Usuarios).filter(Usuarios.senha==senhaUser).first()
+                count += 1
+
+                if senhaUser == 's':
+                    secretQuestion = raw_input("Quem e o seu maior fa? ")
+                    if secretQuestion == 'arnold':
+                        printPass = session.query(Usuarios).filter(Usuarios.email==emailUser).first()
+                        print "Sua senha e",printPass.senha
+                    else:
+                        print "Resposta incorreta. Saindo do sistema"
+                        sys.exit()
+
+            else:
+                print "Usuario autenticado"
+                break
 
     except Exception as e:
         print "Erro: %s"%e
         session.rollback()
+
 
 def alterar_senha():
     print "Alteracao de senha"
