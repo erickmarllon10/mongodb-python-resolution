@@ -19,6 +19,7 @@ def menu():
     return opcao
 
 def switch(x):
+<<<<<<< HEAD
     user = Users()
     server = Servers()
     dict_options = {1:user.cadastrar_usuario,
@@ -28,6 +29,9 @@ def switch(x):
                     5:server.definir_adm,
                     6:user.alterar_senha,
                     7:user.sair}
+=======
+    dict_options = {1:cadastrar_usuario,2:acessar_sistema,3:cadastrar_servidor,4:remover_servidor,5:definir_adm,6:alterar_senha,7:sair,}
+>>>>>>> e4e43c051d8516db2b60076c55b502e56dceb2c6
     dict_options[x]()
 
 if __name__ == '__main__':
