@@ -17,7 +17,7 @@ def menu():
     return opcao
 
 def switch(x):
-    dict_options = {1:cadastrar_usuario,2:acessar_sistema,3:cadastrar_servidor,4:remover_servidor,5:definir_adm,6:alterar_senha,7:sair}
+    dict_options = {1:cadastrar_usuario,2:acessar_sistema,3:cadastrar_servidor,4:remover_servidor,5:definir_adm,6:alterar_senha,7:sair,}
     dict_options[x]()
 
 if __name__ == '__main__':

@@ -3,6 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column,Integer,String
 from sqlalchemy.orm import sessionmaker
 from Models.Model import Servidores, Usuarios
+from Usuarios.Usuarios import listar_adm
 
 def cadastrar_servidor():
     print "Cadastro de Servidores"
@@ -21,22 +22,6 @@ def cadastrar_servidor():
     except Exception as e:
         print "Erro: "%e
         session.rollback()
-
-
-def acessar_servidor(login):
-    print "Acessando servidores"
-    try:
-        engine = create_engine("postgresql://onxentiadmin:123456@127.0.0.1/test")
-        Session = sessionmaker()
-        Session.configure(bind=engine)
-        session = Session()
-        servidores = session.query(Servidores).all()
-        for s in servidores:
-            print "Id:",s.id,"Nome:",s.nome,"IP:",s.endereco
-
-    except Exception as e:
-        print "Erro: %s"%e
-
 
 def remover_servidor():
     print "Removendo servidores"
