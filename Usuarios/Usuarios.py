@@ -47,12 +47,12 @@ def acessar_sistema():
                 emailUser = raw_input("Usuario nao encontrado. Digite o seu email: ")
             else:
                 break
-        userPass = session.query(Usuarios).filter(Usuarios.senha==senhaUser).first()
+        userPass = session.query(Usuarios).filter(Usuarios.email==emailUser, Usuarios.senha==senhaUser).first()
         count = 1
         while count <=4:
             if userPass == None:
                 senhaUser = raw_input("senha incorreta. Digite a senha novamente ou s para \"esqueci a senha\" (tentativa %s de 3): "%count)
-                userPass = session.query(Usuarios).filter(Usuarios.senha==senhaUser).first()
+                userPass = session.query(Usuarios).filter(Usuarios.email==emailUser, Usuarios.senha==senhaUser).first()
                 count += 1
 
                 if senhaUser == 's':
