@@ -3,15 +3,14 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column,Integer,String
 from sqlalchemy.orm import sessionmaker
 from Models.Model import Servidores, Usuarios
-from Usuarios.Usuarios import listar_adm
+from Usuarios.Usuarios import Users
 
 class Servers:
 
-<<<<<<< HEAD
     def __init__(self):
         pass
 
-    def cadastrar_servidor():
+    def cadastrar_servidor(self):
         print "Cadastro de Servidores"
         nome = raw_input("Digite o nome do servidor: ")
         endereco = raw_input("Digite o endereco IP do servidor %s: "%nome)
@@ -29,46 +28,7 @@ class Servers:
             print "Erro: "%e
             session.rollback()
 
-
-    def acessar_servidor(login):
-        print "Acessando servidores"
-        try:
-            engine = create_engine("postgresql://onxentiadmin:123456@127.0.0.1/test")
-            Session = sessionmaker()
-            Session.configure(bind=engine)
-            session = Session()
-            servidores = session.query(Servidores).all()
-            for s in servidores:
-                print "Id:",s.id,"Nome:",s.nome,"IP:",s.endereco
-
-        except Exception as e:
-            print "Erro: %s"%e
-=======
-def remover_servidor():
-    print "Removendo servidores"
-    try:
-        engine = create_engine("postgresql://onxentiadmin:123456@127.0.0.1/test")
-        Session = sessionmaker()
-        Session.configure(bind=engine)
-        session = Session()
-        servidores = session.query(Servidores).all()
-        for s in servidores:
-            print "Id:",s.id,"Nome:",s.nome,"IP:",s.endereco
-        opcao = input("Digite o ID do servidor que deseja remover: ")
-        servidor = session.query(Servidores).filter(Servidores.id==opcao).first()
-        ask = raw_input("Tem certeza que deseja remover o servidor %s? (s ou n): "%servidor.nome)
-        if ask == 's':
-            session.delete(servidor)
-            session.commit()
-            print "Servidor %s removido com sucesso!"%servidor.nome
-        else:
-            print "Parece que vc desistiu!"
-    except Exception as e:
-        print "Erro: %s"%e
->>>>>>> e4e43c051d8516db2b60076c55b502e56dceb2c6
-
-
-    def remover_servidor():
+    def remover_servidor(self):
         print "Removendo servidores"
         try:
             engine = create_engine("postgresql://onxentiadmin:123456@127.0.0.1/test")
@@ -90,8 +50,9 @@ def remover_servidor():
         except Exception as e:
             print "Erro: %s"%e
 
-    def definir_adm():
-        listar_adm()
+    def definir_adm(self):
+        usr = Users()
+        usr.listar_adm()
         print "Definindo administrador"
         try:
             engine = create_engine("postgresql://onxentiadmin:123456@127.0.0.1/test")

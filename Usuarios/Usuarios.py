@@ -5,7 +5,6 @@ from sqlalchemy import Column,Integer,String
 from sqlalchemy.orm import sessionmaker
 from Models.Model import Usuarios
 from Models.Model import Servidores
-from MongoDB.MongoFunctions import registrar_logs
 from datetime import datetime
 
 class Users:
