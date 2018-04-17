@@ -1,10 +1,9 @@
-from Usuarios.Usuarios import Users
-from Servidores.Servidores import Servers
-from MongoDB.MongoFunctions import MongoFunctions
+from Usuarios.Usuarios import cadastrar_usuario, acessar_sistema, alterar_senha, sair
+from Servidores.Servidores import cadastrar_servidor, remover_servidor, definir_adm
+from MongoDB.MongoFunctions import listar_ultimos_acessos
 
 def menu():
-    lastaccess = MongoFunctions()
-    lastaccess.listar_ultimos_acessos()
+    listar_ultimos_acessos()
     print "\
             1 - Cadastrar Usuario: \n\
             2 - Acessar Sistema: \n\
@@ -18,9 +17,7 @@ def menu():
     return opcao
 
 def switch(x):
-    server = Servers()
-    user = Users()
-    dict_options = {1:user.cadastrar_usuario,2:user.acessar_sistema,3:server.cadastrar_servidor,4:server.remover_servidor,5:server.definir_adm,6:user.alterar_senha,7:user.sair}
+    dict_options = {1:cadastrar_usuario,2:acessar_sistema,3:cadastrar_servidor,4:remover_servidor,5:definir_adm,6:alterar_senha,7:sair}
     dict_options[x]()
 
 if __name__ == '__main__':
